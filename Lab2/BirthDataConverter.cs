@@ -2,7 +2,7 @@
 
 namespace Lab2
 {
-    internal static class BirthDataUtils
+    static class BirthDataUtils
     {
         internal static bool IsBirthday(DateTime birthDate)
         {
@@ -23,7 +23,7 @@ namespace Lab2
             return IsValidAge(CalculateAge(birthDate));
         }
 
-        private static bool IsValidAge(int age)
+        static bool IsValidAge(int age)
         {
             return age >= 0 && age <= 130;
         }

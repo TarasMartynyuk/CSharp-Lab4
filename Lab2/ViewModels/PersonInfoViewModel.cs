@@ -8,7 +8,7 @@ namespace Lab2.ViewModels
     /// <summary>
     /// VM that corresponds to window showing all the properties of the person
     /// </summary>
-    internal class PersonInfoViewModel : ObservableObject
+    class PersonInfoViewModel : ObservableObject
     {
         #region binding properties
         public Visibility Visibility
@@ -33,12 +33,10 @@ namespace Lab2.ViewModels
         public AstrologicalSign AstrologicalSign => _person?.AstrologicalSign ?? throw new PersonNullException();
 
         public ZodiacSign ZodiacSign => _person?.ZodiacSign ?? throw new PersonNullException();
-
-
         #endregion
 
-        private Visibility _visibility = Visibility.Collapsed;
-        private Person _person;
+        Visibility _visibility = Visibility.Collapsed;
+        Person _person;
 
         /// <summary>
         /// Binds this vm's properties to the specified person object,
@@ -49,11 +47,10 @@ namespace Lab2.ViewModels
         {
             _person = person ?? throw new NullReferenceException(nameof(person));
             Visibility = Visibility.Visible;
-            AttachNotifyChangeEventsToPersonProperties(person);
             NotifyPersonDependentPropertiesChanged();
         }
 
-        private void NotifyPersonDependentPropertiesChanged()
+        void NotifyPersonDependentPropertiesChanged()
         {
             var personDependentProperties = new string[]
             {
@@ -64,22 +61,6 @@ namespace Lab2.ViewModels
             {
                 OnPropertyChanged(propName);
             }
-        }
-
-        /// <summary>
-        /// wires up the notify changed events of this class'es properties
-        /// to corresponding properties of Person obj,
-        /// to reflect the changes in the model
-        /// </summary>
-        private void AttachNotifyChangeEventsToPersonProperties(Person person)
-        {
-            // not strictly nesessary for this lab
-            person.PropertyChanged += Person_PropertyChanged;
-        }
-
-        private void Person_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            //TODO: fire the OnPropChanged event for every property of this Vm when the corresponding person property event fires
         }
     }
 }

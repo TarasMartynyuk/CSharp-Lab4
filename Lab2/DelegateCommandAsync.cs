@@ -6,8 +6,8 @@ namespace Lab2
 {
     public class DelegateCommandAsync : ICommand
     {
-        private readonly Predicate<object> _canExecute;
-        private readonly Func<object, Task> _executeAsync;
+        readonly Predicate<object> _canExecute;
+        readonly Func<object, Task> _executeAsync;
 
         public event EventHandler CanExecuteChanged
         {

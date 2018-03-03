@@ -2,36 +2,13 @@
 
 namespace Lab2.Models
 {
-    internal class Person : ObservableObject
+    class Person
     {
         #region read & write binding properties
-        internal string Name 
-        {
-            get => _name;
-            private set => SetValue(ref _name, value);
-        }
-
-        internal string Surname 
-        {
-            get => _surname;
-            private set => SetValue(ref _surname, value);
-        }
-
-        internal string Email
-        {
-            get => _email;
-            private set => SetValue(ref _email, value);
-        }
-
-        internal DateTime DateOfBirth
-        {
-            get => _dateOfBirth;
-            private set
-            {
-                SetValue(ref _dateOfBirth, value);
-                NotifyBirthDateDependentPropertiesChanged();
-            }
-        }
+        internal string Name { get; private set;}
+        internal string Surname { get; private set;}
+        internal string Email { get; private set;}
+        internal DateTime DateOfBirth { get; private set;}
 
         #endregion
         #region read only binding properties
@@ -44,10 +21,6 @@ namespace Lab2.Models
         internal ZodiacSign ZodiacSign => GetZodiacSign(DateOfBirth);
         #endregion
 
-        private string _name;
-        private string _surname;
-        private string _email;
-        private DateTime _dateOfBirth;
 
         #region ctors
         internal Person(string name, string surname, string email, DateTime dateOfBirth) : this(name, surname, email)
@@ -73,7 +46,7 @@ namespace Lab2.Models
         }
         #endregion
 
-        private static AstrologicalSign GetAstrologicalSign(DateTime birthDate)
+        static AstrologicalSign GetAstrologicalSign(DateTime birthDate)
         {
             const int astrologicalYearStartMonth = 3;
 
@@ -86,20 +59,12 @@ namespace Lab2.Models
             return (AstrologicalSign) monthOrdinalFromMarch;
         }
 
-        private static ZodiacSign GetZodiacSign(DateTime birthDate)
+        static ZodiacSign GetZodiacSign(DateTime birthDate)
         {
             // the first year when the cycle would start after 0th yearAD
             const int firstCycleStartAd = 4;
             int inCycleYear = (birthDate.Year - firstCycleStartAd) % 12;
             return (ZodiacSign) inCycleYear;
-        }
-
-        private void NotifyBirthDateDependentPropertiesChanged()
-        {
-            OnPropertyChanged(nameof(IsBirthday));
-            OnPropertyChanged(nameof(IsAdult));
-            OnPropertyChanged(nameof(AstrologicalSign));
-            OnPropertyChanged(nameof(ZodiacSign));
         }
     }
 }

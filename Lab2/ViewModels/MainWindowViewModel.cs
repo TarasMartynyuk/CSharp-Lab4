@@ -20,7 +20,7 @@ namespace Lab2.ViewModels
         public ICommand PersonDataSubmitCommand { get; }
         #endregion
 
-        private readonly PersonInfoViewModel _personInfoVm;
+        readonly PersonInfoViewModel _personInfoVm;
 
         internal MainWindowViewModel(PersonInfoViewModel personInfoVm)
         {
@@ -29,13 +29,14 @@ namespace Lab2.ViewModels
         }
 
         #region command delegates
-        private bool AllFieldsHaveBeenSet(object o)
+
+        bool AllFieldsHaveBeenSet(object o)
         {
             return ! (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Surname) ||
                 string.IsNullOrEmpty(Email)); // date time always has default value 
         }
 
-        private async Task CreateAndShowPersonFromInputedData(object o)
+        async Task CreateAndShowPersonFromInputedData(object o)
         {
 
             Console.WriteLine(DateOfBirth);
