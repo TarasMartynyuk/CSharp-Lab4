@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Lab2.Models;
 
@@ -20,11 +21,11 @@ namespace Lab2.ViewModels
         public ICommand PersonDataSubmitCommand { get; }
         #endregion
 
-        readonly PersonInfoViewModel _personInfoVm;
+        readonly Grid _personInfoGrid;
 
-        internal MainWindowViewModel(PersonInfoViewModel personInfoVm)
+        internal MainWindowViewModel(Grid personInfoGrid)
         {
-            _personInfoVm = personInfoVm ?? throw new ArgumentNullException(nameof(personInfoVm));
+            _personInfoGrid = personInfoGrid ?? throw new ArgumentNullException(nameof(personInfoGrid));
             PersonDataSubmitCommand = new DelegateCommandAsync(CreateAndShowPersonFromInputedData, AllFieldsHaveBeenSet);
         }
 
@@ -51,11 +52,15 @@ namespace Lab2.ViewModels
                     MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
 
-            await Task.Factory.StartNew(() => {
-                var person = new Person(Name, Surname, Email, DateOfBirth);
-                _personInfoVm.ShowPersonInfo(person);
-            });
+            // cannot access DataContext from non-ui thread
+            // and anyway, creating the new thread would take more time that just execution this code
+            var person = new Person(Name, Surname, Email, DateOfBirth);
+            var personInfoVM = new PersonInfoViewModel(person);
+            _personInfoGrid.DataContext = personInfoVM;
+            personInfoVM.Visibility = Visibility.Visible;
+
         }
         #endregion
+
     }
 }

@@ -14,39 +14,35 @@ namespace Lab2.ViewModels
         public Visibility Visibility
         {
             get => _visibility;
-            private set => SetValue(ref _visibility, value);
+            set => SetValue(ref _visibility, value);
         } 
 
-        public string Name => _person == null ? throw new PersonNullException() : _person.Name;
+        public string Name => Person == null ? throw new PersonNullException() : Person.Name;
 
-        public string Surname => _person == null ? throw new PersonNullException() : _person.Surname;
+        public string Surname => Person == null ? throw new PersonNullException() : Person.Surname;
 
-        public string Email => _person == null ? throw new PersonNullException() : _person.Email;
+        public string Email => Person == null ? throw new PersonNullException() : Person.Email;
 
         [DataType(DataType.Date)]
-        public DateTime DateOfBirth => _person?.DateOfBirth ?? throw new PersonNullException();
+        public DateTime DateOfBirth => Person?.DateOfBirth ?? throw new PersonNullException();
 
-        public bool IsAdult => _person?.IsAdult ?? throw new PersonNullException();
+        public bool IsAdult => Person?.IsAdult ?? throw new PersonNullException();
 
-        public bool IsBirthday => _person?.IsBirthday ?? throw new PersonNullException();
+        public bool IsBirthday => Person?.IsBirthday ?? throw new PersonNullException();
 
-        public AstrologicalSign AstrologicalSign => _person?.AstrologicalSign ?? throw new PersonNullException();
+        public AstrologicalSign AstrologicalSign => Person?.AstrologicalSign ?? throw new PersonNullException();
 
-        public ZodiacSign ZodiacSign => _person?.ZodiacSign ?? throw new PersonNullException();
+        public ZodiacSign ZodiacSign => Person?.ZodiacSign ?? throw new PersonNullException();
         #endregion
 
-        Visibility _visibility = Visibility.Collapsed;
-        Person _person;
+        public Person Person{get; private set; }
 
-        /// <summary>
-        /// Binds this vm's properties to the specified person object,
-        /// and makes the corresponding view appear on the screen
-        /// </summary>
-        /// <param name="person"></param>
-        internal void ShowPersonInfo(Person person)
+        Visibility _visibility = Visibility.Collapsed;
+
+        // now i have proper initialization
+        public PersonInfoViewModel(Person person)
         {
-            _person = person ?? throw new NullReferenceException(nameof(person));
-            Visibility = Visibility.Visible;
+            Person = person ?? throw new ArgumentNullException(nameof(person));
             NotifyPersonDependentPropertiesChanged();
         }
 

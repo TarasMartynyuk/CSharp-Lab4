@@ -11,9 +11,7 @@ namespace Lab2
         public MainWindow()
         {
             InitializeComponent();
-            var personInfoVm = new PersonInfoViewModel();
-            PersonInfoGrid.DataContext = personInfoVm;
-            DataContext = new MainWindowViewModel(personInfoVm);
+            DataContext = new MainWindowViewModel(PersonInfoGrid);
         }
     }
 }
