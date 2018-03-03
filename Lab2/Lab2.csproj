@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DelegateCommandAsync.cs" />
+    <Compile Include="EmailValidator.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PersonInfoViewModel.cs" />
     <Compile Include="ViewModels\PersonNullException.cs" />

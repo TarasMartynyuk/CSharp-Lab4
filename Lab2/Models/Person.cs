@@ -38,7 +38,7 @@ namespace Lab2.Models
             {
                 throw new ArgumentNullException(nameof(email));
             }
-            if(! IsValidFormat(email))
+            if(! EmailValidator.IsValidFormat(email))
             {
                 throw new ArgumentException("the email is badly fomatted");
             }
@@ -77,20 +77,5 @@ namespace Lab2.Models
             int inCycleYear = (birthDate.Year - firstCycleStartAd) % 12;
             return (ZodiacSign) inCycleYear;
         }
-
-        #region Validation
-        
-        bool IsValidFormat(string email)
-        {
-            // corutesy of @Maheep
-            string pattern = @"^([0-9a-zA-Z]" + //Start with a digit or alphabetical
-                @"([\+\-_\.][0-9a-zA-Z]+)*" + // No continuous or ending +-_. chars in email
-                @")+" +
-                @"@(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]*\.)+[a-zA-Z0-9]{2,17})$";
-            
-            return Regex.IsMatch(email, pattern);
-        }
-
-        #endregion
     }
 }

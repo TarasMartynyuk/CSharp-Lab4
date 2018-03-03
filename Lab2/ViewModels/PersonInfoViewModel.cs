@@ -11,12 +11,6 @@ namespace Lab2.ViewModels
     class PersonInfoViewModel : ObservableObject
     {
         #region binding properties
-        public Visibility Visibility
-        {
-            get => _visibility;
-            set => SetValue(ref _visibility, value);
-        } 
-
         public string Name => Person == null ? throw new PersonNullException() : Person.Name;
 
         public string Surname => Person == null ? throw new PersonNullException() : Person.Surname;
@@ -36,8 +30,6 @@ namespace Lab2.ViewModels
         #endregion
 
         public Person Person{get; private set; }
-
-        Visibility _visibility = Visibility.Collapsed;
 
         // now i have proper initialization
         public PersonInfoViewModel(Person person)

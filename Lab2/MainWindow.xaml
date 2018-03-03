@@ -36,7 +36,7 @@
 
 
 
-        <Grid x:Name="PersonInfoGrid" Visibility="{Binding Visibility}"  HorizontalAlignment="Stretch"
+        <Grid x:Name="PersonInfoGrid" Visibility="Collapsed"  HorizontalAlignment="Stretch"
               Margin="10,209,0.2,-0.2" Grid.ColumnSpan="2" Grid.Column="0">
             <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" 
                      Text="Here's your person stats:" VerticalAlignment="Top" Width="200" TextAlignment="Center"/>

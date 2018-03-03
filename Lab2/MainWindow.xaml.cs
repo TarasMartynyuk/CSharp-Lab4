@@ -11,6 +11,7 @@ namespace Lab2
         public MainWindow()
         {
             InitializeComponent();
+
             DataContext = new MainWindowViewModel(PersonInfoGrid);
         }
     }

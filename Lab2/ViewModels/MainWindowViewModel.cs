@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using Lab2.Models;
 
@@ -26,12 +27,13 @@ namespace Lab2.ViewModels
         internal MainWindowViewModel(Grid personInfoGrid)
         {
             _personInfoGrid = personInfoGrid ?? throw new ArgumentNullException(nameof(personInfoGrid));
-            PersonDataSubmitCommand = new DelegateCommandAsync(CreateAndShowPersonFromInputedData, AllFieldsHaveBeenSet);
+            PersonDataSubmitCommand = new DelegateCommandAsync(CreateAndShowPersonFromInputedData, _ => 
+                _personInfoGrid.Visibility != Visibility.Visible && AllFieldsHaveBeenSet());
         }
 
         #region command delegates
 
-        bool AllFieldsHaveBeenSet(object o)
+        bool AllFieldsHaveBeenSet()
         {
             return ! (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Surname) ||
                 string.IsNullOrEmpty(Email)); // date time always has default value 
@@ -52,12 +54,19 @@ namespace Lab2.ViewModels
                     MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
 
+            if(! EmailValidator.IsValidFormat(Email))
+            {
+                MessageBox.Show("The email is badly formatted!", "error", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                return;
+            }
+
             // cannot access DataContext from non-ui thread
             // and anyway, creating the new thread would take more time that just execution this code
             var person = new Person(Name, Surname, Email, DateOfBirth);
             var personInfoVM = new PersonInfoViewModel(person);
             _personInfoGrid.DataContext = personInfoVM;
-            personInfoVM.Visibility = Visibility.Visible;
+
+            _personInfoGrid.Visibility = Visibility.Visible;
 
         }
         #endregion
