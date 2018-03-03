@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Lab2.Models
 {
@@ -21,17 +22,27 @@ namespace Lab2.Models
         internal ZodiacSign ZodiacSign => GetZodiacSign(DateOfBirth);
         #endregion
 
-
         #region ctors
         internal Person(string name, string surname, string email, DateTime dateOfBirth) : this(name, surname, email)
         {
+            if(! BirthDataUtils.IsValidBirthDate(dateOfBirth))
+            {
+                throw new ArgumentOutOfRangeException(nameof(dateOfBirth));
+            }
             DateOfBirth = dateOfBirth;
-            
         }
 
         internal Person(string name, string surname, string email) : this(name, surname)
         {
-            Email = email ?? throw new ArgumentNullException(nameof(email));
+            if(email == null)
+            {
+                throw new ArgumentNullException(nameof(email));
+            }
+            if(! IsValidFormat(email))
+            {
+                throw new ArgumentException("the email is badly fomatted");
+            }
+            Email = email;
         }
 
         internal Person(string name, string surname, DateTime dateOfBirth) : this(name, surname)
@@ -66,5 +77,20 @@ namespace Lab2.Models
             int inCycleYear = (birthDate.Year - firstCycleStartAd) % 12;
             return (ZodiacSign) inCycleYear;
         }
+
+        #region Validation
+        
+        bool IsValidFormat(string email)
+        {
+            // corutesy of @Maheep
+            string pattern = @"^([0-9a-zA-Z]" + //Start with a digit or alphabetical
+                @"([\+\-_\.][0-9a-zA-Z]+)*" + // No continuous or ending +-_. chars in email
+                @")+" +
+                @"@(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]*\.)+[a-zA-Z0-9]{2,17})$";
+            
+            return Regex.IsMatch(email, pattern);
+        }
+
+        #endregion
     }
 }

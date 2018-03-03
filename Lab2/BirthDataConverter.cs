@@ -4,6 +4,7 @@ namespace Lab2
 {
     static class BirthDataUtils
     {
+        const int MaxAge = 135;
         internal static bool IsBirthday(DateTime birthDate)
         {
             if(IsValidBirthDate(birthDate) == false)
@@ -25,7 +26,7 @@ namespace Lab2
 
         static bool IsValidAge(int age)
         {
-            return age >= 0 && age <= 130;
+            return age >= 0 && age <= MaxAge;
         }
     }
 }
