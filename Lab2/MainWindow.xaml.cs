@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using Lab2.ViewModels;
 
 namespace Lab2
@@ -11,8 +12,11 @@ namespace Lab2
         public MainWindow()
         {
             InitializeComponent();
+            PersonsGrid.DataContext = new PersonListViewModel();
 
-            DataContext = new MainWindowViewModel(PersonInfoGrid);
+            var sideMenu = new SideMenuView();
+            Grid.SetColumn(sideMenu, 9);
+            MainGrid.Children.Add(sideMenu);
         }
     }
 }

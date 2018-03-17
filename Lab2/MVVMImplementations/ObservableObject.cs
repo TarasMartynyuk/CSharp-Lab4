@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Lab2
+namespace Lab2.MVVMImplementations
 {
     public abstract class ObservableObject : INotifyPropertyChanged
     {

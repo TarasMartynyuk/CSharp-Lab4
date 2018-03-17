@@ -1,6 +1,0 @@
-﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=2DFB814876EF584A9A19387CBD40FF01/AbsolutePath/@EntryValue">C:\Downloads\Навчання\resharperSettings.DotSettings</s:String>
-	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=2DFB814876EF584A9A19387CBD40FF01/RelativePath/@EntryValue">..\..\..\..\..\Downloads\Навчання\resharperSettings.DotSettings</s:String>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=2DFB814876EF584A9A19387CBD40FF01/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File2DFB814876EF584A9A19387CBD40FF01/@KeyIndexDefined">True</s:Boolean>
-	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File2DFB814876EF584A9A19387CBD40FF01/RelativePriority/@EntryValue">1</s:Double></wpf:ResourceDictionary>

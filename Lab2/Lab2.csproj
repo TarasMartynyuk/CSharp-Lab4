@@ -57,12 +57,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DelegateCommandAsync.cs" />
+    <Compile Include="MVVMImplementations\DelegateCommandAsync.cs" />
     <Compile Include="EmailValidator.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\PersonInfoViewModel.cs" />
-    <Compile Include="ViewModels\PersonNullException.cs" />
+    <Compile Include="PersonListGenerator.cs" />
+    <Compile Include="SideMenuView.cs" />
+    <Compile Include="ViewModels\PersonListViewModel.cs" />
     <Compile Include="Models\ZodiacSign.cs" />
+    <Compile Include="ViewModels\SideMenuViewModel.cs" />
+    <Compile Include="ViewModels\PersonPropertyName.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,7 +75,7 @@
     </Compile>
     <Compile Include="Models\AstrologicalSign.cs" />
     <Compile Include="BirthDataConverter.cs" />
-    <Compile Include="ObservableObject.cs" />
+    <Compile Include="MVVMImplementations\ObservableObject.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Lab2
+namespace Lab2.MVVMImplementations
 {
     public class DelegateCommandAsync : ICommand
     {
-        readonly Predicate<object> _canExecute;
-        readonly Func<object, Task> _executeAsync;
+        private readonly Predicate<object> _canExecute;
+        private readonly Func<object, Task> _executeAsync;
 
         public event EventHandler CanExecuteChanged
         {
@@ -34,7 +34,6 @@ namespace Lab2
         public async void Execute(object parameter)
         {
             await _executeAsync(parameter);
-            Console.WriteLine("execute end");
         }
     }
 }

@@ -1,25 +1,19 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 
 namespace Lab2.Models
 {
     class Person
     {
-        #region read & write binding properties
-        internal string Name { get; private set;}
-        internal string Surname { get; private set;}
-        internal string Email { get; private set;}
-        internal DateTime DateOfBirth { get; private set;}
+        #region Binding properties
+        public string Name { get; }
+        public string Surname { get; }
+        public string Email { get; } = "N/A";
+        public DateTime DateOfBirth { get; } = new DateTime(1970, 1, 1);
 
-        #endregion
-        #region read only binding properties
-        internal bool IsAdult => BirthDataUtils.CalculateAge(DateOfBirth) >= 18;
-
-        internal bool IsBirthday => BirthDataUtils.IsBirthday(DateOfBirth);
-
-        internal AstrologicalSign AstrologicalSign => GetAstrologicalSign(DateOfBirth);
-
-        internal ZodiacSign ZodiacSign => GetZodiacSign(DateOfBirth);
+        public bool IsAdult => BirthDataUtils.CalculateAge(DateOfBirth) >= 18;
+        public bool IsBirthday => BirthDataUtils.IsBirthday(DateOfBirth);
+        public AstrologicalSign AstrologicalSign => GetAstrologicalSign(DateOfBirth);
+        public ZodiacSign ZodiacSign => GetZodiacSign(DateOfBirth);
         #endregion
 
         #region ctors
@@ -57,7 +51,7 @@ namespace Lab2.Models
         }
         #endregion
 
-        static AstrologicalSign GetAstrologicalSign(DateTime birthDate)
+        private static AstrologicalSign GetAstrologicalSign(DateTime birthDate)
         {
             const int astrologicalYearStartMonth = 3;
 
@@ -70,7 +64,7 @@ namespace Lab2.Models
             return (AstrologicalSign) monthOrdinalFromMarch;
         }
 
-        static ZodiacSign GetZodiacSign(DateTime birthDate)
+        private static ZodiacSign GetZodiacSign(DateTime birthDate)
         {
             // the first year when the cycle would start after 0th yearAD
             const int firstCycleStartAd = 4;
