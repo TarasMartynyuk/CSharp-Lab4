@@ -42,7 +42,12 @@ namespace Lab2
                 ItemsSource = Enum.GetValues(typeof(PersonPropertyName)).Cast<PersonPropertyName>()
             };
 
-            var b = new Binding();
+            //sortPropChooser.SelectedItem
+
+            var b = new Binding("SelectedItem");
+            b.Source = sortPropChooser;
+            //BindingOperations.Set
+            
 
 
 
